@@ -18,6 +18,14 @@ class _MetricsAppState extends State<MetricsApp> {
       providers: [BlocProvider(create: (_) => AnalysisBloc())],
       child: CupertinoApp(
         color: CupertinoColors.white,
+        theme: CupertinoThemeData(
+          primaryColor: CupertinoColors.activeBlue,
+          scaffoldBackgroundColor: CupertinoColors.white,
+          barBackgroundColor: CupertinoColors.white,
+          textTheme: CupertinoTextThemeData(
+            navActionTextStyle: TextStyle(color: CupertinoColors.black),
+          ),
+        ),
         localizationsDelegates: [
           DefaultMaterialLocalizations.delegate,
           DefaultCupertinoLocalizations.delegate,

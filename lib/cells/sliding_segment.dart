@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class SlidingSegment extends StatefulWidget {
   final List<String> tabs;
@@ -37,7 +38,7 @@ class _SlidingSegmentState extends State<SlidingSegment> {
                   fontSize: 12,
                   color: segmentedControlValue == index
                       ? CupertinoColors.white
-                      : CupertinoColors.systemGrey,
+                      : Colors.grey,
                 )),
           ),
         });
@@ -53,7 +54,7 @@ class _SlidingSegmentState extends State<SlidingSegment> {
         child: CupertinoSlidingSegmentedControl(
           groupValue: segmentedControlValue,
           padding: EdgeInsets.all(4),
-          backgroundColor: CupertinoColors.systemGrey5,
+          backgroundColor: Colors.grey[200]!,
           thumbColor: CupertinoColors.systemBlue,
           onValueChanged: (int? value) {
             setState(() {

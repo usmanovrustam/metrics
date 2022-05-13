@@ -1,7 +1,8 @@
 import 'dart:math';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart' show Card;
+import 'package:flutter/material.dart'
+    show Card, CircularProgressIndicator, Colors;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrics/bloc/analysis_bloc.dart';
 import 'package:metrics/cells/sliding_segment.dart';
@@ -431,11 +432,14 @@ class _HomeControllerState extends State<HomeController> {
           }
           if (state is LoadingState) {
             child = Expanded(
-              child: Center(child: CupertinoActivityIndicator()),
+              child: Center(child: CircularProgressIndicator()),
             );
           }
           if (state is FailedState) {
-            child = Text(state.detailedError.toString());
+            child = Text(
+              state.detailedError.toString(),
+              style: TextStyle(color: CupertinoColors.systemRed),
+            );
           }
           return Padding(
             padding: EdgeInsets.all(16),
@@ -448,15 +452,18 @@ class _HomeControllerState extends State<HomeController> {
                         controller: controller,
                         padding: EdgeInsets.all(16),
                         placeholder: "Enter the URL of the page",
+                        placeholderStyle: TextStyle(color: Colors.grey),
+                        style: TextStyle(color: Colors.black),
                         decoration: BoxDecoration(
-                          color: CupertinoColors.systemGrey6,
+                          color: Colors.grey[200],
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
                     ),
                     const SizedBox(width: 10),
                     CupertinoButton.filled(
-                      child: Text("Enter"),
+                      child:
+                          Text("Enter", style: TextStyle(color: Colors.white)),
                       onPressed: sendData,
                     )
                   ],
@@ -471,6 +478,7 @@ class _HomeControllerState extends State<HomeController> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      backgroundColor: CupertinoColors.white,
       child: SafeArea(child: view),
     );
   }
