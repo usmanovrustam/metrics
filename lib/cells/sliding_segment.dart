@@ -35,7 +35,7 @@ class _SlidingSegmentState extends State<SlidingSegment> {
             padding: EdgeInsets.all(12),
             child: Text(widget.tabs[index],
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 10,
                   color: segmentedControlValue == index
                       ? CupertinoColors.white
                       : Colors.grey,

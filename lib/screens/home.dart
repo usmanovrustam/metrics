@@ -69,7 +69,7 @@ class _HomeControllerState extends State<HomeController> {
                 color: CupertinoColors.activeBlue,
               ),
               const SizedBox(width: 10),
-              Text("Total clicks"),
+              Text("Jami bosishlar"),
               const SizedBox(width: 40),
               Container(
                 width: 10,
@@ -77,7 +77,7 @@ class _HomeControllerState extends State<HomeController> {
                 color: CupertinoColors.systemIndigo,
               ),
               const SizedBox(width: 10),
-              Text("Total views")
+              Text("Jami ko’rishlar")
             ],
           ),
           const SizedBox(height: 40),
@@ -115,43 +115,43 @@ class _HomeControllerState extends State<HomeController> {
   Widget lightHouseDetails(LoadedState state) => ListView(
         children: [
           detailsTitle(
-            "Request Url: ",
+            "URL manzil so’rovi: ",
             state.data!["lighthouseResult"]["requestedUrl"],
           ),
           const SizedBox(height: 10),
           detailsTitle(
-            "LightHouse Version: ",
+            "Lighthouse versiyasi: ",
             state.data!["lighthouseResult"]["lighthouseVersion"],
           ),
           const SizedBox(height: 10),
           detailsTitle(
-            "User Agent: ",
+            "Foydalanuvchi agenti: ",
             state.data!["lighthouseResult"]["userAgent"],
           ),
           const SizedBox(height: 10),
           detailsTitle(
-            "Fetch Time: ",
+            "Olinish vaqti: ",
             state.data!["lighthouseResult"]["fetchTime"],
           ),
           const SizedBox(height: 10),
           detailsTitle(
-            "Environment: ",
+            "Muhiti: ",
             state.data!["lighthouseResult"]["environment"]["networkUserAgent"],
           ),
           const SizedBox(height: 10),
           detailsTitle(
-            "Emulated Form Factor: ",
+            "Emulyatsiya qilingan shakl omili: ",
             state.data!["lighthouseResult"]["configSettings"]
                 ["emulatedFormFactor"],
           ),
           const SizedBox(height: 10),
           detailsTitle(
-            "Locale: ",
+            "Mahalliy: ",
             state.data!["lighthouseResult"]["configSettings"]["locale"],
           ),
           const SizedBox(height: 10),
           detailsTitle(
-            "Analysis Time: ",
+            "Tahlil vaqti: ",
             state.data!["analysisUTCTimestamp"],
           ),
         ],
@@ -159,6 +159,7 @@ class _HomeControllerState extends State<HomeController> {
 
   Widget card({Map<String, dynamic>? data, String? title}) {
     Color? color;
+    String? category;
 
     switch (data!["category"]) {
       case "AVERAGE":
@@ -169,6 +170,18 @@ class _HomeControllerState extends State<HomeController> {
         break;
       case "FAST":
         color = CupertinoColors.systemGreen;
+        break;
+    }
+
+    switch (data["category"]) {
+      case "AVERAGE":
+        category = "O’rtacha";
+        break;
+      case "SLOW":
+        category = "Sekin";
+        break;
+      case "FAST":
+        category = "Tez";
         break;
     }
 
@@ -198,14 +211,14 @@ class _HomeControllerState extends State<HomeController> {
                         ),
                       ),
                       Text(
-                        data["category"],
+                        category!.toUpperCase(),
                         style: TextStyle(fontSize: 10, color: color!),
                       ),
                     ],
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    "Loading page",
+                    "Sahifa yuklanishi",
                     textAlign: TextAlign.end,
                     style: TextStyle(
                       fontSize: 12,
@@ -240,7 +253,7 @@ class _HomeControllerState extends State<HomeController> {
                   Row(
                     children: [
                       Text(
-                        "Good",
+                        "Yaxshi",
                         style: TextStyle(
                           fontSize: 12,
                           color: CupertinoColors.activeGreen,
@@ -265,7 +278,7 @@ class _HomeControllerState extends State<HomeController> {
                   Row(
                     children: [
                       Text(
-                        "Rework required",
+                        "Qayta ishlash talab qilinadi",
                         style: TextStyle(
                           fontSize: 12,
                           color: CupertinoColors.activeOrange,
@@ -290,7 +303,7 @@ class _HomeControllerState extends State<HomeController> {
                   Row(
                     children: [
                       Text(
-                        "Bad",
+                        "Yomon",
                         style: TextStyle(
                           fontSize: 12,
                           color: CupertinoColors.systemRed,
@@ -326,37 +339,37 @@ class _HomeControllerState extends State<HomeController> {
         padding: EdgeInsets.only(top: 10),
         children: [
           card(
-            title: "Largest Contentful Paint (LCP)",
+            title: "Eng Katta Kontent Ko’rinishi (EKKK)",
             data: state.data!["loadingExperience"]["metrics"]
                 ["LARGEST_CONTENTFUL_PAINT_MS"],
           ),
           const SizedBox(height: 10),
           card(
-            title: "First Input Delay (FID)",
+            title: "Birinchi Kirish Kechikishi (BKK)",
             data: state.data!["loadingExperience"]["metrics"]
                 ["FIRST_INPUT_DELAY_MS"],
           ),
           const SizedBox(height: 10),
           card(
-            title: "Cumulative Layout Shift (CLS)",
+            title: "Kumulyativ Tartibning Siljishi (KTS)",
             data: state.data!["loadingExperience"]["metrics"]
                 ["CUMULATIVE_LAYOUT_SHIFT_SCORE"],
           ),
           const SizedBox(height: 10),
           card(
-            title: "First Contentful Paint (FCP)",
+            title: "Birinchi Kontent Ko’rinishi (BKK)",
             data: state.data!["loadingExperience"]["metrics"]
                 ["FIRST_CONTENTFUL_PAINT_MS"],
           ),
           const SizedBox(height: 10),
           card(
-            title: "Interaction to Next Paint (INP)",
+            title: "Keyingi ko’rinish bilan o’zaro ta’sir (KKO'T)",
             data: state.data!["loadingExperience"]["metrics"]
                 ["EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT"],
           ),
           const SizedBox(height: 10),
           card(
-            title: "Time to First Byte (TTFB)",
+            title: "Birinchi Bayt Vaqti (BBV)",
             data: state.data!["loadingExperience"]["metrics"]
                 ["EXPERIMENTAL_TIME_TO_FIRST_BYTE"],
           ),
@@ -369,37 +382,37 @@ class _HomeControllerState extends State<HomeController> {
         padding: EdgeInsets.only(top: 10),
         children: [
           card(
-            title: "Largest Contentful Paint (LCP)",
+            title: "Eng Katta Kontent Ko’rinishi (EKKK)",
             data: state.data!["originLoadingExperience"]["metrics"]
                 ["LARGEST_CONTENTFUL_PAINT_MS"],
           ),
           const SizedBox(height: 10),
           card(
-            title: "First Input Delay (FID)",
+            title: "Birinchi Kirish Kechikishi (BKK)",
             data: state.data!["originLoadingExperience"]["metrics"]
                 ["FIRST_INPUT_DELAY_MS"],
           ),
           const SizedBox(height: 10),
           card(
-            title: "Cumulative Layout Shift (CLS)",
+            title: "Kumulyativ Tartibning Siljishi (KTS)",
             data: state.data!["originLoadingExperience"]["metrics"]
                 ["CUMULATIVE_LAYOUT_SHIFT_SCORE"],
           ),
           const SizedBox(height: 10),
           card(
-            title: "First Contentful Paint (FCP)",
+            title: "Birinchi Kontent Ko’rinishi (BKK)",
             data: state.data!["originLoadingExperience"]["metrics"]
                 ["FIRST_CONTENTFUL_PAINT_MS"],
           ),
           const SizedBox(height: 10),
           card(
-            title: "Interaction to Next Paint (INP)",
+            title: "Keyingi ko’rinish bilan o’zaro ta’sir (KKO'T)",
             data: state.data!["originLoadingExperience"]["metrics"]
                 ["EXPERIMENTAL_INTERACTION_TO_NEXT_PAINT"],
           ),
           const SizedBox(height: 10),
           card(
-            title: "Time to First Byte (TTFB)",
+            title: "Birinchi Bayt Vaqti (BBV)",
             data: state.data!["originLoadingExperience"]["metrics"]
                 ["EXPERIMENTAL_TIME_TO_FIRST_BYTE"],
           ),
@@ -411,7 +424,7 @@ class _HomeControllerState extends State<HomeController> {
           Widget child = Expanded(
             child: Center(
               child: Text(
-                "Learn how to make your pages load faster on any device.",
+                "Sahifalaringiz turli xil qurilmalarda qanday yuklanishini o’rganing.",
                 style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.center,
               ),
@@ -420,7 +433,12 @@ class _HomeControllerState extends State<HomeController> {
           if (state is LoadedState) {
             child = Expanded(
               child: SlidingSegment(
-                tabs: ["Origin", "Loading", "Efficiency", "Details"],
+                tabs: [
+                  "Kelib chiqishi",
+                  "Yuklanishi",
+                  "Samaradorligi",
+                  "Tafsilotlar"
+                ],
                 views: [
                   metricsList(state),
                   experienceList(state),
@@ -451,7 +469,7 @@ class _HomeControllerState extends State<HomeController> {
                       child: CupertinoTextField(
                         controller: controller,
                         padding: EdgeInsets.all(16),
-                        placeholder: "Enter the URL of the page",
+                        placeholder: "Sahifa URL manzilini kiriting",
                         placeholderStyle: TextStyle(color: Colors.grey),
                         style: TextStyle(color: Colors.black),
                         decoration: BoxDecoration(
@@ -462,8 +480,8 @@ class _HomeControllerState extends State<HomeController> {
                     ),
                     const SizedBox(width: 10),
                     CupertinoButton.filled(
-                      child:
-                          Text("Enter", style: TextStyle(color: Colors.white)),
+                      child: Text("Kiritish",
+                          style: TextStyle(color: Colors.white)),
                       onPressed: sendData,
                     )
                   ],
